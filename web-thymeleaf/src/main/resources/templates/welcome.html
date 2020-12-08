@@ -22,8 +22,13 @@
     <div class="starter-template">
         <h1 th:text="'Welcome, ' + ${welcomeName} + '!'">Hello!</h1>
         <h2>
-            <span th:text="'Your hostname: ' + ${hostname}"></span>
+            <span th:text="'Server name: ' + ${hostname}"></span>
+            <span th:text="'Server address:	 ' + ${ip}"></span>
+            <span th:text="'Date: ' + ${today} + ' ' + ${time}"></span>
+            <span th:text="'Url: ' + ${_Path}"></span>
+
         </h2>
+
     </div>
 
 

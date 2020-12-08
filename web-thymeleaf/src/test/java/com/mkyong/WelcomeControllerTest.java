@@ -1,4 +1,4 @@
-package com.mkyong;
+/*package com.mkyong;
 
 import com.mkyong.controller.WelcomeController;
 import org.junit.Test;
@@ -54,4 +54,4 @@ public class WelcomeControllerTest {
     }
 
 
-}
+}*/

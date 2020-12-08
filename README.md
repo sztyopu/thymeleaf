@@ -1,2 +1,0 @@
-# thymeleaf
-thymeleaf examples
