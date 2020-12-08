@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+
+    <title>Server Info</title>
+
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+
+</head>
+
+<body  th:style="'background: url(/img/wall.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; '">
+<div class="table-title" >
+    <h3> Your Server informations:</h3>
+    <p></p>
+
+</div>
+<table class="table-fill">
+    <thead>
+
+    </thead>
+    <tbody class="table-hover">
+    <tr>
+        <td class="text-left" ><b>Server name: </b></td>
+        <td class="text-left" th:text=" ${hostname}"></td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Server address:</b> </td>
+        <td class="text-left" th:text=" ${ip}"></td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Date</b></td>
+        <td class="text-left" th:text="${today} +' '+ ${time}"></td>
+    </tr>
+<!--    <tr>
+        <td class="text-left"><b>Url</b></td>
+        <td class="text-left" th:text="${_Path}"></td>
+    </tr>-->
+    </tbody>
+</table>
+
+
+</body>
+</html>
