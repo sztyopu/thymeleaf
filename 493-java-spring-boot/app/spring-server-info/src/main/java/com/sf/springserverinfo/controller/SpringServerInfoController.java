@@ -12,6 +12,12 @@ import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+
+
 
 @Controller
 public class SpringServerInfoController {
@@ -46,8 +52,22 @@ public class SpringServerInfoController {
 
 
     @GetMapping("/")
-    public String init(Model model) throws UnknownHostException, MalformedURLException {
+    public String init(Model model, HttpServletRequest req) throws UnknownHostException, MalformedURLException {
 
+        Map<String, String> h = new HashMap<>();
+        Enumeration<String> headerNames = req.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            Enumeration<String> headers = req.getHeaders(headerName);
+            StringBuilder sb = new StringBuilder("");
+            while (headers.hasMoreElements()) {
+                String headerValue = headers.nextElement();
+                sb.append(headerValue).append(" ; ");
+            }
+            h.put(headerName, sb.toString());
+            System.out.println(String.format("%s : %s", headerName, sb.toString()));
+        }
+        
         //Server name
         hostname = InetAddress.getLocalHost().getHostName();
 
@@ -61,16 +81,19 @@ public class SpringServerInfoController {
         //Server URL
         //URL url = new URL("http://localhost/");
         //String _Path = url.getPath();
+        String _Path = servletContext.getContextPath();
         System.out.println("Ez az Url: " + servletContext.getContextPath());
 
         model.addAttribute("hostname", hostname);
         model.addAttribute("ip", ip);
         model.addAttribute("today", today);
         model.addAttribute("time", time);
-        // model.addAttribute("_Path", _Path);
+        model.addAttribute("_Path", _Path);
+        model.addAttribute("headers", h);
 
         return "table";
     }
+
 
     @GetMapping("/profile")
     public String profile(Model model) {

@@ -1,0 +1,14 @@
+FROM maven:3.5-jdk-8-alpine AS appbuild
+
+COPY web-thymeleafe /usr/src/web-thymeleafe
+WORKDIR /usr/src/web-thymeleafe
+
+RUN mvn -B package -DskipTests=true
+
+FROM openjdk:8-jdk-alpine
+WORKDIR /app
+
+COPY --from=appbuild /usr/src/web-thymeleafe/target/web-thymeleaf-1.0.jar .
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/web-thymeleaf-1.0.jar"]
